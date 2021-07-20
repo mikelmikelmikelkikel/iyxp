@@ -11909,8 +11909,10 @@ addcmd('sharkbite_sharkesp',{},function(args, speaker)
 	if tostring(currentPlaceId) == '734159876' then 
 		if sharkEspEnabled == false then sharkEspEnabled = true
 			Sharkesp()
+			notify("Shark ESP Enabled")
 		else sharkEspEnabled = false
 			cleanshark()
+			notify("Shark ESP Disabled")
 		end
 	else notify("ERROR: This command can only be run in Sharkbite") 
 	end
