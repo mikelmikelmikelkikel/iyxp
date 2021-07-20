@@ -10887,7 +10887,7 @@ addcmd('ufo',{},function(args, speaker)
 	Spin.Name = "Spinning"
 	Spin.Parent = getRoot(speaker.Character)
 	Spin.MaxTorque = Vector3.new(0, math.huge, 0)
-	Spin.AngularVelocity = Vector3.new(0,250,0)
+	Spin.AngularVelocity = Vector3.new(0,150,0)
 end)
 
 addcmd('clearhats',{'cleanhats'},function(args, speaker)
