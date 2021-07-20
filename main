@@ -8718,10 +8718,10 @@ addcmd('loopbring',{},function(args, speaker)
 							pchar = Players[v].Character
 							if pchar~= nil and Players[v].Character ~= nil and getRoot(pchar) and speaker.Character ~= nil and getRoot(speaker.Character) then
 								getRoot(pchar).CFrame = getRoot(speaker.Character).CFrame + Vector3.new(distance,1,0)
-							end
-							for _,child in pairs(pchar:GetDescendants()) do
-								if child:IsA('Part') or child:IsA('MeshPart') then
-									child.CanCollide = false
+								for _, v in pairs(pchar:GetDescendants()) do
+									if v:IsA('Part') then v.CanCollide = false
+										elseif v:IsA('MeshPart') then v.CanCollide = false
+									end
 								end
 							end
 							wait(lDelay)
