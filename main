@@ -77,6 +77,7 @@ Select_13 = Instance.new("TextButton")
 Xray = Instance.new("TextLabel")
 Select_10 = Instance.new("TextButton")
 Swim = Instance.new("TextLabel")
+Climb = Instance.new("TextLabel")
 Select_11 = Instance.new("TextButton")
 Fling = Instance.new("TextLabel")
 Select_12 = Instance.new("TextButton")
@@ -86,6 +87,7 @@ Vehiclefly = Instance.new("TextLabel")
 Select_15 = Instance.new("TextButton")
 VehicleNoclip = Instance.new("TextLabel")
 Select_16 = Instance.new("TextButton")
+Select_17 = Instance.new("TextButton")
 shadow_2 = Instance.new("Frame")
 PopupText_2 = Instance.new("TextLabel")
 Exit_2 = Instance.new("TextButton")
@@ -1155,6 +1157,35 @@ Select_16.TextColor3 = Color3.new(0, 0, 0)
 Select_16.ZIndex = 10
 table.insert(shade3,Select_16)
 table.insert(text2,Select_16)
+
+Climb.Name = "Climb"
+Climb.Parent = Toggles
+Climb.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
+Climb.BorderSizePixel = 0
+Climb.Position = UDim2.new(0, 0, 0, 150)
+Climb.Size = UDim2.new(0, 192, 0, 20)
+Climb.Font = Enum.Font.SourceSans
+Climb.TextSize = 14
+Climb.Text = "    Toggle Climb"
+Climb.TextColor3 = Color3.new(1, 1, 1)
+Climb.TextXAlignment = Enum.TextXAlignment.Left
+Climb.ZIndex = 10
+table.insert(shade2,Climb)
+table.insert(text1,Climb)
+
+Select_17.Name = "Select"
+Select_17.Parent = Climb
+Select_17.BackgroundColor3 = Color3.fromRGB(78, 78, 79)
+Select_17.BorderSizePixel = 0
+Select_17.Position = UDim2.new(0, 152, 0, 0)
+Select_17.Size = UDim2.new(0, 40, 0, 20)
+Select_17.Font = Enum.Font.SourceSans
+Select_17.TextSize = 14
+Select_17.Text = "Add"
+Select_17.TextColor3 = Color3.new(0, 0, 0)
+Select_17.ZIndex = 10
+table.insert(shade3,Select_17)
+table.insert(text2,Select_17)
 
 shadow_2.Name = "shadow"
 shadow_2.Parent = KeybindEditor
@@ -4624,7 +4655,6 @@ CMDs[#CMDs + 1] = {NAME = 'loopoof', DESC = 'Loops everyones character sounds (e
 CMDs[#CMDs + 1] = {NAME = 'unloopoof', DESC = 'Stops the oof chaos'}
 CMDs[#CMDs + 1] = {NAME = 'muteboombox [plr]', DESC = 'Mutes someones boombox'}
 CMDs[#CMDs + 1] = {NAME = 'unmuteboombox [plr]', DESC = 'Unmutes someones boombox'}
-CMDs[#CMDs + 1] = {NAME = 'unloopoof', DESC = 'Stops the oof chaos'}
 CMDs[#CMDs + 1] = {NAME = 'hitbox [plr] [size]', DESC = 'Expands the hitbox for players heads (default is 1)'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'reset', DESC = 'Resets your character normally'}
@@ -4749,6 +4779,8 @@ CMDs[#CMDs + 1] = {NAME = 'breakloops / break (cmd loops)', DESC = 'Stops any cm
 CMDs[#CMDs + 1] = {NAME = 'removecmd / deletecmd', DESC = 'Removes a command until the admin is reloaded'}
 CMDs[#CMDs + 1] = {NAME = 'tpwalk / teleportwalk', DESC = 'Teleports you to your move direction'}
 CMDs[#CMDs + 1] = {NAME = 'untpwalk / unteleportwalk', DESC = 'Undoes tpwalk / teleportwalk'}
+CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
+CMDs[#CMDs + 1] = {NAME = 'sharkbite_infammo', DESC = 'Gives your weapon infinite ammo on Sharkbite'}
 wait()
 
 for i = 1, #CMDs do
@@ -6064,6 +6096,19 @@ Swim.Select.MouseButton1Click:Connect(function()
 			notify('Keybinds Updated','Binded '..keyPressed..' to toggle swim')
 		else
 			notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to toggle swim')
+		end
+	end
+end)
+
+Climb.Select.MouseButton1Click:Connect(function()
+	if keySelected then
+		addbind('toggleclimb',keyPressed,bindChosenKeyUp)
+		refreshbinds()
+		updatesaves()
+		if keyPressed == 'RightClick' or keyPressed == 'LeftClick' then
+			notify('Keybinds Updated','Binded '..keyPressed..' to toggle climb')
+		else
+			notify('Keybinds Updated','Binded '..keyPressed:sub(14)..' to toggle climb')
 		end
 	end
 end)
@@ -11740,6 +11785,27 @@ end)
 
 addcmd('removecmd',{'deletecmd'},function(args, speaker)
 	removecmd(args[1])
+end)
+
+addcmd('sharkbite_infammo',{},function(args, speaker)
+	local plr = game:GetService("Players").LocalPlayer
+	game.Players.LocalPlayer.Character:FindFirstChild("Humanoid"):UnequipTools()
+	function getGun()
+		for i,v in pairs(plr.Backpack:GetChildren()) do
+			if v.Name ~= "Flare Gun" and v:FindFirstChild("LocalScript") then
+				return v.LocalScript
+			end
+		end
+	end
+	for i,v in next, getgc() do 
+		if type(v) == "function" and getfenv(v).script and getfenv(v).script == getGun() then 
+			for i2,v2 in next, debug.getupvalues(v) do 
+				if type(v2) == "number" then 
+					debug.setupvalue(v, i2, math.huge)
+				end
+			end
+		end
+	end
 end)
 
 updateColors(currentShade1,shade1)
