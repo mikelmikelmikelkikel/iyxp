@@ -4607,6 +4607,8 @@ CMDs[#CMDs + 1] = {NAME = 'destroyheight / dh [num]', DESC = 'Sets FallenPartsDe
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'fullbright / fb (CLIENT)', DESC = 'Makes the map brighter / more visible'}
 CMDs[#CMDs + 1] = {NAME = 'loopfullbright / loopfb (CLIENT)', DESC = 'Makes the map brighter / more visible but looped'}
+CMDs[#CMDs + 1] = {NAME = 'futurelighting / fl (CLIENT)', DESC = 'Turns future lighting on'}
+CMDs[#CMDs + 1] = {NAME = 'unfuturelighting / unfl (CLIENT)', DESC = 'Turns future lighting off'}
 CMDs[#CMDs + 1] = {NAME = 'ambient [num] [num] [num] (CLIENT)', DESC = 'Changes ambient'}
 CMDs[#CMDs + 1] = {NAME = 'day (CLIENT)', DESC = 'Changes the time to day for the client'}
 CMDs[#CMDs + 1] = {NAME = 'night (CLIENT)', DESC = 'Changes the time to night for the client'}
@@ -10737,6 +10739,15 @@ addcmd('unloopfullbright',{'unloopfb'},function(args, speaker)
 	if brightLoop then
 		brightLoop:Disconnect()
 	end
+end)
+
+addcmd('futurelighting',{'fl'},function(args, speaker)
+	savedLight = gethiddenproperty(game.Lighting, "Technology")
+	sethiddenproperty(game.Lighting, "Technology", Enum.Technology.Future)
+end)
+
+addcmd('unfuturelighting',{'unfl'},function(args, speaker)
+	sethiddenproperty(game.Lighting, "Technology", savedLight)
 end)
 
 addcmd('ambient',{},function(args, speaker)
