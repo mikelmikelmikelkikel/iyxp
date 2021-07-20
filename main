@@ -8719,6 +8719,11 @@ addcmd('loopbring',{},function(args, speaker)
 							if pchar~= nil and Players[v].Character ~= nil and getRoot(pchar) and speaker.Character ~= nil and getRoot(speaker.Character) then
 								getRoot(pchar).CFrame = getRoot(speaker.Character).CFrame + Vector3.new(distance,1,0)
 							end
+							for _,child in pairs(pchar:GetDescendants()) do
+								if child:IsA('Part') or child:IsA('MeshPart') then
+									child.CanCollide = false
+								end
+							end
 							wait(lDelay)
 						else 
 							for a,b in pairs(bringT) do if b == plrName then table.remove(bringT, a) end end
