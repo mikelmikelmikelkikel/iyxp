@@ -7663,9 +7663,9 @@ addcmd('noesp',{'unesp'},function(args, speaker)
 	end
 end)
 
-local cdespEnabled = false
+
 addcmd('clickdetectoresp',{},function(args, speaker)
-	if cdespEnabled == false then cdespEnabled = true
+	
 	for i,v in pairs(game.Workspace:GetDescendants()) do
 		if v.ClassName == "ClickDetector" and v.Parent.ClassName == "Part" then
 			local a = Instance.new("BoxHandleAdornment")
@@ -7679,10 +7679,6 @@ addcmd('clickdetectoresp',{},function(args, speaker)
 			a.Color = BrickColor.new("Really red")
 		end
 	end
-		notify('Click Detector ESP enabled')
-	else
-		notify('Click Detector ESP is already enabled')
-	end
 end)
 
 addcmd('unclickdetectoresp',{},function(args, speaker)
@@ -7691,8 +7687,6 @@ addcmd('unclickdetectoresp',{},function(args, speaker)
 			v:Destroy()
 		end
 	end
-	cdespEnabled = false
-	notify('Click Detector ESP disabled')
 end)
 
 local espParts = {}
