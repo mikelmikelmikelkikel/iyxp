@@ -4717,10 +4717,12 @@ CMDs[#CMDs + 1] = {NAME = 'blocktool', DESC = 'Turns the currently selected tool
 CMDs[#CMDs + 1] = {NAME = 'creeper', DESC = 'Makes you look like a creeper'}
 CMDs[#CMDs + 1] = {NAME = 'swastika / bodyswastika', DESC = 'Turns you into a swastika'}
 CMDs[#CMDs + 1] = {NAME = 'limbstack / limbtower', DESC = 'Stacks all of your limbs on top of your head'}
+CMDs[#CMDs + 1] = {NAME = 'fetall / slenderman', DESC = 'Attaches your arms to the bottom of your legs'}
 CMDs[#CMDs + 1] = {NAME = 'drophats', DESC = 'Drops your hats'}
 CMDs[#CMDs + 1] = {NAME = 'nohats / deletehats / rhats', DESC = 'Deletes your hats'}
 CMDs[#CMDs + 1] = {NAME = 'hatspin / spinhats', DESC = 'Spins your characters accessories'}
 CMDs[#CMDs + 1] = {NAME = 'unhatspin / unspinhats', DESC = 'Undoes spinhats'}
+CMDs[#CMDs + 1] = {NAME = 'hataura', DESC = 'Hats will travel around you'}
 CMDs[#CMDs + 1] = {NAME = 'clearhats / cleanhats', DESC = 'Clears hats in the workspace'}
 CMDs[#CMDs + 1] = {NAME = 'chardelete / cd [instance name]', DESC = 'Removes any part with a certain name from your character'}
 CMDs[#CMDs + 1] = {NAME = 'chardeleteclass / cdc [class name]', DESC = 'Removes any part with a certain classname from your character'}
@@ -10385,6 +10387,26 @@ addcmd('limbstack',{'limbtower'},function(args, speaker)
 	end
 end)
 
+addcmd('fetall',{'slenderman'},function(args, speaker)
+	local plr = game.Players.LocalPlayer
+	local plrChar = plr.Character
+	if tostring(plrChar:FindFirstChildOfClass('Humanoid').RigType) == 'Enum.HumanoidRigType.R6' then
+		local runservice=game:service"RunService";
+		local player=game:service"Players"["LocalPlayer"];
+		local character=player["Character"];
+
+		character["Humanoid"].HipHeight=2;
+		character["Right Arm"]:BreakJoints();
+		character["Left Arm"]:BreakJoints();
+		while runservice["Heartbeat"]:Wait() do
+			character["Right Arm"].CFrame=character["Right Leg"].CFrame*CFrame.new(0,-2,0);
+			character["Left Arm"].CFrame=character["Left Leg"].CFrame*CFrame.new(0,-2,0);
+		end
+	else
+		notify("Error","This script is R6 exclusive")
+	end
+end)
+
 addcmd('bang',{'rape'},function(args, speaker)
 	if not r15(speaker) then
 		execCmd('unbang')
@@ -10762,6 +10784,55 @@ addcmd('unhatspin',{'unspinhats'},function(args, speaker)
 		end
 		wait()
 		v.Parent = speaker.Character
+	end
+end)
+
+addcmd('hataura',{},function(args, speaker)
+	_G.on = true
+	local parts = {}
+	local bparts = {}
+	local chr = game.Players.LocalPlayer.Character
+	local bp = game.Players.LocalPlayer.Backpack
+	local pb = true
+	for i,d in pairs(game.Players.LocalPlayer.Character.Humanoid:GetAccessories()) do
+		local part = nil
+		pcall(function()
+			part = d.Handle
+		end)
+		if part ~= nil then
+			local c = Instance.new("Tool")
+			c.Name = "s-"..d.Name
+			c.Parent = game.Players.LocalPlayer.Backpack
+			c.Parent = game.Players.LocalPlayer.Character
+			part.Massless = true
+			part:FindFirstChildOfClass("Weld"):Destroy()
+			part.Parent = c
+
+			for l,k in pairs(part:GetChildren()) do
+				k:Destroy()
+			end
+			pb = not pb
+			table.insert((pb and parts or bparts), c)
+		end
+
+	end
+	local rs = game:GetService('RunService').RenderStepped
+	local l = 1
+
+	while _G.on and rs:wait() do
+		l = (l >= 360 and 1 or l+1)
+		for i,d in pairs(parts) do
+			local cfd = ((game.Players.LocalPlayer.Character:FindFirstChild("Right Arm") or game.Players.LocalPlayer.Character:FindFirstChild("RightLowerArm")).CFrame * CFrame.new(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, -1, 0))
+			d.Parent = game.Players.LocalPlayer.Backpack
+			d.Grip = cfd:toObjectSpace(CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.fromEulerAnglesXYZ(math.rad(l + ((360 / #parts) * i)), math.rad(l + ((360 / #parts) * i)) ,math.rad(l + ((360 / #parts) * i))) * CFrame.new(0,0,5)):inverse()
+			d.Parent = game.Players.LocalPlayer.Character
+		end
+		for i,d in pairs(bparts) do
+			local cfd = ((game.Players.LocalPlayer.Character:FindFirstChild("Right Arm") or game.Players.LocalPlayer.Character:FindFirstChild("RightLowerArm")).CFrame * CFrame.new(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, -1, 0))
+			d.Parent = game.Players.LocalPlayer.Backpack
+			d.Grip = cfd:toObjectSpace(CFrame.new(game.Players.LocalPlayer.Character.Head.Position) * CFrame.fromEulerAnglesXYZ(math.rad(l + ((360 / #bparts) * i)), math.rad(l + ((360 / #bparts) * i)) ,math.rad(l + ((360 / #bparts) * i))) * CFrame.new(0,0,-5)):inverse()
+			d.Parent = game.Players.LocalPlayer.Character
+		end
 	end
 end)
 
