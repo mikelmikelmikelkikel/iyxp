@@ -4630,6 +4630,7 @@ CMDs[#CMDs + 1] = {NAME = 'age [plr]', DESC = 'Tells you the age of a player'}
 CMDs[#CMDs + 1] = {NAME = 'chatage [plr]', DESC = 'Chats the age of a player'}
 CMDs[#CMDs + 1] = {NAME = 'joindate / jd [plr]', DESC = 'Tells you the date the player joined Roblox'}
 CMDs[#CMDs + 1] = {NAME = 'chatjoindate / cjd [plr]', DESC = 'Chats the date the player joined Roblox'}
+CMDs[#CMDs + 1] = {NAME = 'systemchat / schat [msg]', DESC = 'Chat as the System'}
 CMDs[#CMDs + 1] = {NAME = 'copyname / copyuser [plr]', DESC = 'Copies a players full username to your clipboard'}
 CMDs[#CMDs + 1] = {NAME = 'userid / id [plr]', DESC = 'Notifies a players user ID'}
 CMDs[#CMDs + 1] = {NAME = 'copyuserid / copyid [plr]', DESC = 'Copies a players user ID to your clipboard'}
@@ -8633,6 +8634,11 @@ addcmd('chatjoindate',{'cjd'},function(args, speaker)
 	end
 	local chatString = table.concat(dates, ', ')
 	game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(chatString, "All")
+end)
+
+addcmd('systemchat',{'schat'},function(args, speaker)
+	local msg = "                                                                                                                   {System} "..getstring(1)
+	game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, 'All')
 end)
 
 addcmd('copyname',{'copyuser'},function(args, speaker)
