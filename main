@@ -7682,6 +7682,7 @@ addcmd('clickdetectoresp',{'clickesp', 'cdesp'},function(args, speaker)
 	notify('Click Detector ESP enabled')
 	else
 	notify('Click Detector ESP is already enabled')
+	end
 end)
 
 addcmd('unclickdetectoresp',{'unclickesp', 'uncdesp'},function(args, speaker)
