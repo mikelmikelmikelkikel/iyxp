@@ -11789,6 +11789,9 @@ end)
 
 addcmd('sharkbite_infammo',{},function(args, speaker)
 	local plr = game:GetService("Players").LocalPlayer
+	local currentPlaceId = game.PlaceId
+	if tostring(currentPlaceId) ~= '734159876' then notify("ERROR: This command can only be run in Sharkbite")
+		else
 	game.Players.LocalPlayer.Character:FindFirstChild("Humanoid"):UnequipTools()
 	function getGun()
 		for i,v in pairs(plr.Backpack:GetChildren()) do
@@ -11805,6 +11808,8 @@ addcmd('sharkbite_infammo',{},function(args, speaker)
 				end
 			end
 		end
+		end
+		notify("Your current weapon now has infinite ammo")
 	end
 end)
 
