@@ -11823,8 +11823,12 @@ addcmd('sharkbite_rgbwater',{},function(args, speaker)
 			workspace.Terrain.WaterColor = Color3.fromRGB(52, 120, 154)
 			notify("RGB Water has been disabled")
 		else
-			workspace.Terrain.WaterColor = Color3.fromHSV(tick() * 24 % 255/255, 1, 1)
-			wait()
+			while wait() do
+				if sbrgbwaterenabled ~= false then
+					workspace.Terrain.WaterColor = Color3.fromHSV(tick() * 24 % 255/255, 1, 1)
+					wait()
+				end
+			end
 			sbrgbwaterenabled = true
 			notify("RGB Water has been enabled")
 		end
