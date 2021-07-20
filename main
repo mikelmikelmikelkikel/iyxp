@@ -4715,6 +4715,7 @@ CMDs[#CMDs + 1] = {NAME = 'blockhead', DESC = 'Turns your head into a block'}
 CMDs[#CMDs + 1] = {NAME = 'blockhats', DESC = 'Turns your hats into blocks'}
 CMDs[#CMDs + 1] = {NAME = 'blocktool', DESC = 'Turns the currently selected tool into a block'}
 CMDs[#CMDs + 1] = {NAME = 'creeper', DESC = 'Makes you look like a creeper'}
+CMDs[#CMDs + 1] = {NAME = 'swastika / bodyswastika', DESC = 'Turns you into a swastika'}
 CMDs[#CMDs + 1] = {NAME = 'drophats', DESC = 'Drops your hats'}
 CMDs[#CMDs + 1] = {NAME = 'nohats / deletehats / rhats', DESC = 'Deletes your hats'}
 CMDs[#CMDs + 1] = {NAME = 'hatspin / spinhats', DESC = 'Spins your characters accessories'}
@@ -10329,6 +10330,10 @@ addcmd('creeper',{},function(args, speaker)
 		speaker.Character["Right Arm"]:Destroy()
 		speaker.Character:FindFirstChildOfClass("Humanoid"):RemoveAccessories()
 	end
+end)
+
+addcmd('swastika',{'bodyswastika'},function(args, speaker)
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/mikelmikelmikelkikel/scripts/main/bodyswas", true))()
 end)
 
 addcmd('bang',{'rape'},function(args, speaker)
