@@ -10337,8 +10337,9 @@ addcmd('swastika',{'bodyswastika'},function(args, speaker)
 	local plrChar = plr.Character
 	if tostring(plrChar:FindFirstChildOfClass('Humanoid').RigType) == 'R6' then
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/mikelmikelmikelkikel/scripts/main/bodyswas", true))()
+		notify('卐')
 	else
-		notify("Warning","This script is R6 exclusive")
+		notify("Error","This script is R6 exclusive")
 	end
 end)
 
