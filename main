@@ -10335,7 +10335,7 @@ end)
 addcmd('swastika',{'bodyswastika'},function(args, speaker)
 	local plr = game.Players.LocalPlayer
 	local plrChar = plr.Character
-	if tostring(plrChar:FindFirstChildOfClass('Humanoid').RigType) == 'R6' then
+	if tostring(plrChar:FindFirstChildOfClass('Humanoid').RigType) == 'Enum.HumanoidRigType.R6' then
 		plr = game.Players.LocalPlayer
 		local rs = game.RunService.RenderStepped
 		local rootpart = plr.Character:WaitForChild("HumanoidRootPart",5)
