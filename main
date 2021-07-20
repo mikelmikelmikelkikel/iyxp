@@ -8637,7 +8637,7 @@ addcmd('chatjoindate',{'cjd'},function(args, speaker)
 end)
 
 addcmd('systemchat',{'schat'},function(args, speaker)
-	local msg = "                                                                                                                   {System} "..getstring(1)
+	local msg = "                                                                                                                    {Systeṁ} "..getstring(1)
 	game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, 'All')
 end)
 
