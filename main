@@ -4553,7 +4553,8 @@ CMDs[#CMDs + 1] = {NAME = 'locate [plr]', DESC = 'View a single player and their
 CMDs[#CMDs + 1] = {NAME = 'unlocate / nolocate [plr]', DESC = 'Removes locate'}
 CMDs[#CMDs + 1] = {NAME = 'xray', DESC = 'Makes all parts in workspace transparent'}
 CMDs[#CMDs + 1] = {NAME = 'unxray / noxray', DESC = 'Restores transparency'}
-CMDs[#CMDs + 1] = {NAME = 'watertransparency [num]', DESC = 'Sets terrain waters transparency'}
+CMDs[#CMDs + 1] = {NAME = 'watertransparency [num]', DESC = 'Sets terrain waters transparency to your number'}
+CMDs[#CMDs + 1] = {NAME = 'revertwatertransparency', DESC = 'Sets terrain waters transparency back to default'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'spectate / view [plr]', DESC = 'View a player'}
 CMDs[#CMDs + 1] = {NAME = 'viewpart / viewp [part name]', DESC = 'View a part'}
@@ -11360,8 +11361,15 @@ addcmd('unxray',{'noxray'},function(args, speaker)
 	x(transparent)
 end)
 
+ogwatertransparency = workspace.Terrain.WaterTransparency
 addcmd('watertransparency',{},function(args, speaker)
-	print(args[1])
+	if tonumber(args[1]) ~= nil then
+		workspace.Terrain.WaterTransparency = args[1]
+	end
+end)
+
+addcmd('revertwatertransparency',{},function(args, speaker)
+	workspace.Terrain.WaterTransparency = ogwatertransparency
 end)
 
 addcmd('togglexray',{},function(args, speaker)
