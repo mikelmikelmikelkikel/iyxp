@@ -7215,8 +7215,9 @@ addcmd('climb',{},function(args, speaker)
 		climbstep = game:GetService("RunService").RenderStepped:Connect(function()
 			truss.CFrame = plr.Character.HumanoidRootPart.CFrame*CFrame.new(0,0,-1.5)
 		end)
+		notify("Climbing enabled")
 	else
-		notify("Climbing still active")
+		notify("Climbing already enabled")
 	end
 end)
 
@@ -7230,8 +7231,10 @@ end)
 addcmd('toggleclimb',{},function(args, speaker)
 	if climbing then
 		execCmd('unclimb')
+		notify("Climbing disabled")
 	else
 		execCmd('climb')
+		notify("Climbing enabled")
 	end
 end)
 
