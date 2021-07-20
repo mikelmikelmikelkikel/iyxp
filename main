@@ -4781,7 +4781,7 @@ CMDs[#CMDs + 1] = {NAME = 'tpwalk / teleportwalk', DESC = 'Teleports you to your
 CMDs[#CMDs + 1] = {NAME = 'untpwalk / unteleportwalk', DESC = 'Undoes tpwalk / teleportwalk'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'sharkbite_infammo', DESC = 'Gives your weapon infinite ammo on Sharkbite'}
-CMDs[#CMDs + 1] = {NAME = 'sharkbite_rgbwater', DESC = 'Toggles between RGB and normal water on Sharkbite'}
+CMDs[#CMDs + 1] = {NAME = 'sharkbite_sharkesp', DESC = 'Toggles shark esp on Sharkbite'}
 wait()
 
 for i = 1, #CMDs do
@@ -11814,25 +11814,98 @@ addcmd('sharkbite_infammo',{},function(args, speaker)
 	end
 end)
 
-sbrgbwaterenabled = false
-addcmd('sharkbite_rgbwater',{},function(args, speaker)
+sharkEspEnabled = false
+function Sharkesp()
+	local folder = Instance.new("Folder", game.CoreGui.esp)
+	folder.Name = "sharks"
+	for i,v in pairs(game.Workspace.Sharks:GetChildren()) do
+		if v ~= nil then
+			sharks = {}
+			table.insert(sharks, v.Name)
+			for i = 1, #sharks do
+				sdir = game.Workspace.Sharks[v.Name]
+
+				local sesp = Instance.new("BillboardGui", game.CoreGui.esp.sharks)
+				sesp.Name = sdir.Name
+				sesp.Adornee = sdir.Kill
+				sesp.AlwaysOnTop=true
+				sesp.ResetOnSpawn=false
+				sesp.Size = UDim2.new(1,1,1,1)
+
+				local tag = Instance.new("TextLabel", sesp)
+				tag.Size = UDim2.new(5,5,5,5)
+				tag.Text = sdir.OwnerName.Value
+				tag.TextColor3 = Color3.new(255, 0, 0)
+				tag.TextStrokeTransparency = 0
+				tag.BackgroundTransparency = 1
+
+				local cham = Instance.new("BoxHandleAdornment", game.CoreGui.esp.sharks)
+				cham.Name = sdir.Name
+				cham.Size = sdir:WaitForChild("Body").Size
+				cham.Adornee = sdir.Body
+				cham.AlwaysOnTop = true
+				cham.ZIndex = 5
+				cham.Color3 = Color3.new(244,0,0)
+				cham.Transparency = 0.72
+
+				if sdir:FindFirstChild("Fin") then
+					local fin = Instance.new("BoxHandleAdornment", game.CoreGui.esp.sharks)
+					fin.Name = sdir.Name
+					fin.Size = sdir.Fin.Size
+					fin.Adornee = sdir.Fin
+					fin.AlwaysOnTop = true
+					fin.ZIndex = 5
+					fin.Color3 = Color3.new(244,0,0)
+					fin.Transparency = 0.6
+
+				end end end end end
+game.Workspace:WaitForChild('Sharks').ChildAdded:Connect(function(shark)
+
+	if sharkEspEnabled == true then
+		shark:WaitForChild("Kill")
+		local sesp = Instance.new("BillboardGui", game.CoreGui.esp.sharks)
+		sesp.Name = shark.Name
+		sesp.Adornee = shark.Kill
+		sesp.AlwaysOnTop=true
+		sesp.ResetOnSpawn=false
+		sesp.Size = UDim2.new(1,1,1,1)
+
+
+		local tag = Instance.new("TextLabel", sesp)
+		tag.Size = UDim2.new(10,10,10,10)
+		tag.Text = shark.OwnerName.Value
+		tag.TextColor3 = Color3.new(25,0,0)
+		tag.BackgroundTransparency = 1
+
+		local cham = Instance.new("BoxHandleAdornment", game.CoreGui.esp.sharks)
+		cham.Name = shark.Name
+		cham.Size = shark:WaitForChild("Body").Size
+		cham.Adornee = shark.Body
+		cham.AlwaysOnTop = true
+		cham.ZIndex = 5
+		cham.Color3 = Color3.new(244,0,0)
+		cham.Transparency = 0.72
+
+		if shark:FindFirstChild("Fin") then
+			local fin = Instance.new("BoxHandleAdornment", game.CoreGui.esp.sharks)
+			fin.Name = shark.Name
+			fin.Size = shark.Fin.Size
+			fin.Adornee = shark.Fin
+			fin.AlwaysOnTop = true
+			fin.ZIndex = 5
+			fin.Color3 = Color3.new(244,0,0)
+			fin.Transparency = 0.6
+		end
+	end
+end)
+
+addcmd('sharkbite_sharkesp',{},function(args, speaker)
 	local plr = game:GetService("Players").LocalPlayer
 	local currentPlaceId = game.PlaceId
 	if tostring(currentPlaceId) == '734159876' then 
-		if sbrgbwaterenabled == true then sbrgbwaterenabled = false
-			workspace.Terrain.WaterColor = Color3.fromRGB(52, 120, 154)
-			notify("RGB Water has been disabled")
-		else
-			while wait() do
-				if sbrgbwaterenabled ~= false then
-					workspace.Terrain.WaterColor = Color3.fromHSV(tick() * 24 % 255/255, 1, 1)
-					wait()
-				end
-			end
-			sbrgbwaterenabled = true
-			notify("RGB Water has been enabled")
+		if sharkEspEnabled == false then sharkEspEnabled = true
+			else sharkEspEnabled = false
 		end
-		
 	else notify("ERROR: This command can only be run in Sharkbite") 
 	end
 end)
