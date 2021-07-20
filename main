@@ -10333,7 +10333,13 @@ addcmd('creeper',{},function(args, speaker)
 end)
 
 addcmd('swastika',{'bodyswastika'},function(args, speaker)
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/mikelmikelmikelkikel/scripts/main/bodyswas", true))()
+	local plr = game.Players.LocalPlayer
+	local plrChar = plr.Character
+	if tostring(plrChar:FindFirstChildOfClass('Humanoid').RigType) == 'R6' then
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/mikelmikelmikelkikel/scripts/main/bodyswas", true))()
+	else
+		notify("Warning","This script is R6 exclusive")
+	end
 end)
 
 addcmd('bang',{'rape'},function(args, speaker)
