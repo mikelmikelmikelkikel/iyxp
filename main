@@ -4716,6 +4716,7 @@ CMDs[#CMDs + 1] = {NAME = 'blockhats', DESC = 'Turns your hats into blocks'}
 CMDs[#CMDs + 1] = {NAME = 'blocktool', DESC = 'Turns the currently selected tool into a block'}
 CMDs[#CMDs + 1] = {NAME = 'creeper', DESC = 'Makes you look like a creeper'}
 CMDs[#CMDs + 1] = {NAME = 'swastika / bodyswastika', DESC = 'Turns you into a swastika'}
+CMDs[#CMDs + 1] = {NAME = 'limbstack / limbtower', DESC = 'Stacks all of your limbs on top of your head'}
 CMDs[#CMDs + 1] = {NAME = 'drophats', DESC = 'Drops your hats'}
 CMDs[#CMDs + 1] = {NAME = 'nohats / deletehats / rhats', DESC = 'Deletes your hats'}
 CMDs[#CMDs + 1] = {NAME = 'hatspin / spinhats', DESC = 'Spins your characters accessories'}
@@ -10352,6 +10353,33 @@ addcmd('swastika',{'bodyswastika'},function(args, speaker)
 		cpos(plr.Character["Right Arm"],1.5,1,0,0,0,math.rad(180))
 		cpos(plr.Character["Left Leg"],-1.5,-1,0,0,0,math.rad(0))
 		cpos(plr.Character["Right Leg"],1,-1.5,0,0,0,math.rad(90))
+	else
+		notify("Error","This script is R6 exclusive")
+	end
+end)
+
+addcmd('limbstack',{'limbtower'},function(args, speaker)
+	local plr = game.Players.LocalPlayer
+	local plrChar = plr.Character
+	if tostring(plrChar:FindFirstChildOfClass('Humanoid').RigType) == 'Enum.HumanoidRigType.R6' then
+		local runservice=game:service"RunService";
+		local player=game:service"Players"["LocalPlayer"];
+		local character=player["Character"];
+		local blacklisted="Head Torso HumanoidRootPart";
+		local limbs={};
+
+		for i,v in next,character:children() do
+			if (v.ClassName=="Part") and not blacklisted:find(v.Name) then
+				v:BreakJoints();
+				table.insert(limbs,v);
+			end
+		end
+
+		while runservice["Heartbeat"]:Wait() do
+			for i,v in next,limbs do
+				v.CFrame=character["Head"].CFrame*CFrame.new(0,i*2,0);
+			end
+		end
 	else
 		notify("Error","This script is R6 exclusive")
 	end
