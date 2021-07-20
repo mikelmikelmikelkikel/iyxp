@@ -7664,7 +7664,7 @@ addcmd('noesp',{'unesp'},function(args, speaker)
 end)
 
 
-addcmd('clickdetectoresp',{},function(args, speaker)
+addcmd('clickdetectoresp',{'clickesp'},{'cdesp'},function(args, speaker)
 	
 	for i,v in pairs(game.Workspace:GetDescendants()) do
 		if v.ClassName == "ClickDetector" and v.Parent.ClassName == "Part" then
@@ -7681,7 +7681,7 @@ addcmd('clickdetectoresp',{},function(args, speaker)
 	end
 end)
 
-addcmd('unclickdetectoresp',{},function(args, speaker)
+addcmd('unclickdetectoresp',{'unclickesp'},{'uncdesp'},function(args, speaker)
 	for i,v in pairs(game:GetDescendants()) do
 		if v.ClassName == "BoxHandleAdornment" and v.Name == "clickdetector esp" then
 			v:Destroy()
