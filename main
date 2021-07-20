@@ -4508,6 +4508,10 @@ CMDs[#CMDs + 1] = {NAME = 'partesp [part name]', DESC = 'Highlights a part'}
 CMDs[#CMDs + 1] = {NAME = 'unpartesp / nopartesp [part name]', DESC = 'Removes partesp'}
 CMDs[#CMDs + 1] = {NAME = 'proximityesp / promptesp / ppesp', DESC = 'Enables esp for parts with a proximity prompt'}
 CMDs[#CMDs + 1] = {NAME = 'unproximityesp / unpromptesp / unppesp', DESC = 'Disables esp for parts with a proximity prompt'}
+CMDs[#CMDs + 1] = {NAME = 'touchinterestesp / touchesp / tesp', DESC = 'Enables esp for parts with a touch intersect'}
+CMDs[#CMDs + 1] = {NAME = 'untouchinterestesp / untouchesp / untesp', DESC = 'Disables esp for parts with a touch intersect'}
+CMDs[#CMDs + 1] = {NAME = 'seatesp / vehicleseatesp / sesp', DESC = 'Enables esp for seats & vehicle seats'}
+CMDs[#CMDs + 1] = {NAME = 'unseatesp / unvehicleseatesp / unsesp', DESC = 'Disables esp for seats & vehicle seats'}
 CMDs[#CMDs + 1] = {NAME = 'chams', DESC = 'ESP but without text in the way'}
 CMDs[#CMDs + 1] = {NAME = 'nochams / unchams', DESC = 'Removes chams'}
 CMDs[#CMDs + 1] = {NAME = 'locate [plr]', DESC = 'View a single player and their status'}
@@ -7783,6 +7787,54 @@ end)
 addcmd('unproximityesp',{'unpromptesp', 'unppesp'},function(args, speaker)
 	for i,v in pairs(game:GetDescendants()) do
 		if v.ClassName == "BoxHandleAdornment" and v.Name == "proximity esp" then
+			v:Destroy()
+		end
+	end
+end)
+
+addcmd('touchinterestesp',{'touchesp', 'tesp'},function(args, speaker)
+	for i,v in pairs(game.Workspace:GetDescendants()) do
+		if v.ClassName == "TouchTransmitter" then
+			local a = Instance.new("BoxHandleAdornment")
+			a.Name = "touchinterest esp"
+			a.Parent = v.Parent
+			a.Adornee = v.Parent
+			a.AlwaysOnTop = true
+			a.ZIndex = 0
+			a.Size = v.Parent.Size
+			a.Transparency = 0.3
+			a.Color = BrickColor.new("New Yeller")
+		end
+	end
+end)
+
+addcmd('untouchinterestesp',{'untouchesp', 'untesp'},function(args, speaker)
+	for i,v in pairs(game:GetDescendants()) do
+		if v.ClassName == "BoxHandleAdornment" and v.Name == "touchinterest esp" then
+			v:Destroy()
+		end
+	end
+end)
+
+addcmd('seatesp',{'vehicleseatesp', 'sesp'},function(args, speaker)
+	for i,v in pairs(game.Workspace:GetDescendants()) do
+		if v.ClassName == "Seat" or v.Classname == 'VehicleSeat' then
+			local a = Instance.new("BoxHandleAdornment")
+			a.Name = "seat esp"
+			a.Parent = v
+			a.Adornee = v
+			a.AlwaysOnTop = true
+			a.ZIndex = 0
+			a.Size = v.Size
+			a.Transparency = 0.3
+			a.Color = BrickColor.new("Toothpaste")
+		end
+	end
+end)
+
+addcmd('unseatesp',{'unvehicleseatesp', 'unsesp'},function(args, speaker)
+	for i,v in pairs(game:GetDescendants()) do
+		if v.ClassName == "BoxHandleAdornment" and v.Name == "seat esp" then
 			v:Destroy()
 		end
 	end
