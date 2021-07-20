@@ -11899,12 +11899,18 @@ game.Workspace:WaitForChild('Sharks').ChildAdded:Connect(function(shark)
 	end
 end)
 
+function cleanshark()
+	game.CoreGui.esp.sharks:Destroy()
+end
+
 addcmd('sharkbite_sharkesp',{},function(args, speaker)
 	local plr = game:GetService("Players").LocalPlayer
 	local currentPlaceId = game.PlaceId
 	if tostring(currentPlaceId) == '734159876' then 
 		if sharkEspEnabled == false then sharkEspEnabled = true
-			else sharkEspEnabled = false
+			Sharkesp()
+		else sharkEspEnabled = false
+			cleanshark()
 		end
 	else notify("ERROR: This command can only be run in Sharkbite") 
 	end
