@@ -4533,6 +4533,7 @@ CMDs[#CMDs + 1] = {NAME = 'bubblechat (CLIENT)', DESC = 'Enables bubble chat for
 CMDs[#CMDs + 1] = {NAME = 'unbubblechat / nobubblechat', DESC = 'Disables the bubblechat command'}
 CMDs[#CMDs + 1] = {NAME = 'safechat', DESC = 'Enables safe chat'}
 CMDs[#CMDs + 1] = {NAME = 'nosafechat / disablesafechat', DESC = 'Disables safechat'}
+CMDs[#CMDs + 1] = {NAME = 'dragchat / dragc', DESC = 'Drag roblox chat anywhere hold left click'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'esp', DESC = 'View all players and their status'}
 CMDs[#CMDs + 1] = {NAME = 'noesp / unesp', DESC = 'Removes esp'}
@@ -10112,6 +10113,19 @@ end)
 
 addcmd('nosafechat',{'disablesafechat','unsafechat'},function(args, speaker)
 	speaker.SetSuperSafeChat(false)
+end)
+
+addcmd('dragchat',{'dragc'},function(args, speaker)
+	while not game:IsLoaded() or not game:GetService("CoreGui") or not game:GetService("Players").LocalPlayer or not game:GetService("Players").LocalPlayer.PlayerGui do wait() end
+
+	local chatSettings = require(game:GetService("Chat").ClientChatModules.ChatSettings)
+	local chatFrame = game:GetService("Players").LocalPlayer.PlayerGui.Chat.Frame
+
+	chatSettings.WindowResizable = true
+	chatSettings.WindowDraggable = true
+
+	chatFrame.ChatChannelParentFrame.Visible=true
+	chatFrame.ChatBarParentFrame.Position = chatFrame.ChatChannelParentFrame.Position+UDim2.new(UDim.new(),chatFrame.ChatChannelParentFrame.Size.Y)
 end)
 
 addcmd('blockhead',{},function(args, speaker)
