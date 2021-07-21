@@ -1,5 +1,5 @@
 if IY_LOADED and not _G.IY_DEBUG == true then
-	error("Infinite Yield is already running!",0)
+	error("Infinite Yield X is already running!",0)
 	return
 end
 
@@ -7,7 +7,7 @@ pcall(function() getgenv().IY_LOADED  = true end)
 
 if not game:IsLoaded() then
 	local notLoaded = Instance.new("Message",workspace)
-	notLoaded.Text = 'Infinite Yield is waiting for the game to load'
+	notLoaded.Text = 'Infinite Yield X is waiting for the game to load'
 	game.Loaded:Wait()
 	notLoaded:Destroy()
 end
@@ -601,7 +601,7 @@ Credits.Position = UDim2.new(0, 0, 0.9, 30)
 Credits.Size = UDim2.new(0, 250, 0, 20)
 Credits.Font = Enum.Font.SourceSansLight
 Credits.FontSize = Enum.FontSize.Size18
-Credits.Text = "Edge // Zwolf // Moon // Hunter"
+Credits.Text = "Loading" --Edge // Zwolf // Moon // Hunter
 Credits.TextColor3 = Color3.new(1, 1, 1)
 Credits.ZIndex = 10
 
@@ -3976,7 +3976,7 @@ SaveChatlogs.MouseButton1Down:Connect(function()
 		if #scroll_2:GetChildren() > 0 then
 			notify("Loading",'Hold on a sec')
 			local placeName = game:GetService('MarketplaceService'):GetProductInfo(game.PlaceId).Name
-			local writelogs = '-- Infinite Yield Chat logs for "'..placeName..'"\n'
+			local writelogs = '-- Infinite Yield X Chat logs for "'..placeName..'"\n'
 			for _, child in pairs(scroll_2:GetChildren()) do
 				writelogs = writelogs..'\n'..child.Text
 			end
@@ -10881,13 +10881,13 @@ addcmd('ufo',{},function(args, speaker)
 	execCmd('hatcircle')
 	local plr = game.Players.LocalPlayer
 	local plrChar = plr.Character
-	plrChar.Humanoid.WalkSpeed = 100
+	plrChar.Humanoid.WalkSpeed = 50
 	execCmd('flyjump')
 	local Spin = Instance.new("BodyAngularVelocity")
 	Spin.Name = "Spinning"
 	Spin.Parent = getRoot(speaker.Character)
 	Spin.MaxTorque = Vector3.new(0, math.huge, 0)
-	Spin.AngularVelocity = Vector3.new(0,150,0)
+	Spin.AngularVelocity = Vector3.new(0,50,0)
 end)
 
 addcmd('clearhats',{'cleanhats'},function(args, speaker)
