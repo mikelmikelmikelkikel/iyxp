@@ -10878,16 +10878,16 @@ addcmd('hataura',{},function(args, speaker)
 end)
 
 addcmd('ufo',{},function(args, speaker)
-	execCmd('hatcircle')
+	--execCmd('hatcircle')
 	local plr = game.Players.LocalPlayer
 	local plrChar = plr.Character
-	plrChar.Humanoid.WalkSpeed = 50
+	plrChar.Humanoid.WalkSpeed = 100
 	execCmd('flyjump')
 	local Spin = Instance.new("BodyAngularVelocity")
 	Spin.Name = "Spinning"
 	Spin.Parent = getRoot(speaker.Character)
 	Spin.MaxTorque = Vector3.new(0, math.huge, 0)
-	Spin.AngularVelocity = Vector3.new(0,50,0)
+	Spin.AngularVelocity = Vector3.new(0,100,0)
 end)
 
 addcmd('clearhats',{'cleanhats'},function(args, speaker)
