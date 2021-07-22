@@ -4041,6 +4041,10 @@ EventBind.MouseButton1Click:Connect(function()
 	eventEditor.Frame:TweenPosition(UDim2.new(0.5,-175,0.5,-101), "InOut", "Quart", 0.5, true, nil)
 end)
 
+EventBind.MouseButton1Click:Connect(function()
+	eventEditor.Frame:TweenPosition(UDim2.new(0.5,-175,0.5,-101), "InOut", "Quart", 0.5, true, nil)
+end)
+
 Keybinds.MouseButton1Click:Connect(function()
 	KeybindsFrame:TweenPosition(UDim2.new(0, 0, 0, 0), "InOut", "Quart", 0.5, true, nil)
 	wait(0.5)
@@ -4631,7 +4635,8 @@ CMDs[#CMDs + 1] = {NAME = 'chatage [plr]', DESC = 'Chats the age of a player'}
 CMDs[#CMDs + 1] = {NAME = 'joindate / jd [plr]', DESC = 'Tells you the date the player joined Roblox'}
 CMDs[#CMDs + 1] = {NAME = 'chatjoindate / cjd [plr]', DESC = 'Chats the date the player joined Roblox'}
 CMDs[#CMDs + 1] = {NAME = 'systemchat / schat [msg]', DESC = 'Chat as the System'}
-CMDs[#CMDs + 1] = {NAME = 'doinyourmom', DESC = 'Sings doin your mom'}
+CMDs[#CMDs + 1] = {NAME = 'swastikachat / chatswastika [text_character]', DESC = 'Chats a Swastika with your selected character'}
+CMDs[#CMDs + 1] = {NAME = 'doinyourmom', DESC = 'Sings doin your mom in chat'}
 CMDs[#CMDs + 1] = {NAME = 'copyname / copyuser [plr]', DESC = 'Copies a players full username to your clipboard'}
 CMDs[#CMDs + 1] = {NAME = 'userid / id [plr]', DESC = 'Notifies a players user ID'}
 CMDs[#CMDs + 1] = {NAME = 'copyuserid / copyid [plr]', DESC = 'Copies a players user ID to your clipboard'}
@@ -4722,7 +4727,7 @@ CMDs[#CMDs + 1] = {NAME = 'drophats', DESC = 'Drops your hats'}
 CMDs[#CMDs + 1] = {NAME = 'nohats / deletehats / rhats', DESC = 'Deletes your hats'}
 CMDs[#CMDs + 1] = {NAME = 'hatspin / spinhats', DESC = 'Spins your characters accessories'}
 CMDs[#CMDs + 1] = {NAME = 'unhatspin / unspinhats', DESC = 'Undoes spinhats'}
-CMDs[#CMDs + 1] = {NAME = 'hatcircle', DESC = 'Hats will circle around you'}
+CMDs[#CMDs + 1] = {NAME = 'hatcircle / circlehat', DESC = 'Hats will circle around you'}
 CMDs[#CMDs + 1] = {NAME = 'hataura', DESC = 'Hats will travel around you'}
 CMDs[#CMDs + 1] = {NAME = 'ufo', DESC = 'Become a UFO'}
 CMDs[#CMDs + 1] = {NAME = 'clearhats / cleanhats', DESC = 'Clears hats in the workspace'}
@@ -4746,6 +4751,7 @@ CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'animation / anim [ID] [speed]', DESC = 'Makes your character perform an animation (must be by roblox to replicate)'}
 CMDs[#CMDs + 1] = {NAME = 'dance', DESC = 'Makes you  d a n c e'}
 CMDs[#CMDs + 1] = {NAME = 'undance', DESC = 'Stops dance animations'}
+CMDs[#CMDs + 1] = {NAME = 'togglecustomemotes', DESC = 'Enables custom chat emotes, view a list in Settings>Emote Commands'}
 CMDs[#CMDs + 1] = {NAME = 'spasm', DESC = 'Makes you  c r a z y'}
 CMDs[#CMDs + 1] = {NAME = 'unspasm', DESC = 'Stops spasm'}
 CMDs[#CMDs + 1] = {NAME = 'headthrow', DESC = 'Simply makes you throw your head'}
@@ -4764,7 +4770,7 @@ CMDs[#CMDs + 1] = {NAME = 'unautokeypress', DESC = 'Stops autokeypress'}
 CMDs[#CMDs + 1] = {NAME = 'hovername', DESC = 'Shows a players username when your mouse is hovered over them'}
 CMDs[#CMDs + 1] = {NAME = 'unhovername / nohovername', DESC = 'Turns off hovername'}
 CMDs[#CMDs + 1] = {NAME = 'mousesensitivity / ms [0-10]', DESC = 'Sets your mouse sensitivity (affects first person and right click drag) (default is 1)'}
-CMDs[#CMDs + 1] = {NAME = 'clickdelete', DESC = 'Go to settings>Keybinds>Add for clicktp'}
+CMDs[#CMDs + 1] = {NAME = 'clickdelete', DESC = 'Go to settings>Keybinds>Add for click delete'}
 CMDs[#CMDs + 1] = {NAME = 'clickteleport', DESC = 'Go to settings>Keybinds>Add for click tp'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'tools', DESC = 'Copies tools from ReplicatedStorage and Lighting'}
@@ -4776,7 +4782,7 @@ CMDs[#CMDs + 1] = {NAME = 'copytools [plr] (CLIENT)', DESC = 'Copies a players t
 CMDs[#CMDs + 1] = {NAME = 'dupetools / clonetools [num]', DESC = 'Duplicates your inventory tools a set ammount of times'}
 CMDs[#CMDs + 1] = {NAME = 'droptools', DESC = 'Drops your tools'}
 CMDs[#CMDs + 1] = {NAME = 'droppabletools', DESC = 'Makes your tools droppable'}
-CMDs[#CMDs + 1] = {NAME = 'equiptools', DESC = 'Equips every tool in your inventory at once'}
+CMDs[#CMDs + 1] = {NAME = 'equiptools / equipalltools / equipallt', DESC = 'Equips every tool in your inventory at once'}
 CMDs[#CMDs + 1] = {NAME = 'reach [num]', DESC = 'Increases the hitbox of your held tool'}
 CMDs[#CMDs + 1] = {NAME = 'unreach / noreach', DESC = 'Turns off reach'}
 CMDs[#CMDs + 1] = {NAME = 'grippos [X Y Z]', DESC = 'Changes your current tools grip position'}
@@ -8648,6 +8654,40 @@ addcmd('systemchat',{'schat'},function(args, speaker)
 	game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, 'All')
 end)
 
+addcmd('swastikachat',{'chatswastika'},function(args, speaker)
+	local a = getstring(1)
+	local msg_1 = "          "..a.."   "..a.."   "..a.."   "..a.."   "..a.."                         "..a.."                                                                                           "
+	local msg_2 = "                                  "..a.."                        "..a.."                                                                                   "
+	local msg_3 = "                                  "..a.."                        "..a.."                                                                                   "
+	local msg_4 = "          "..a.."   "..a.."   "..a.."   "..a.."   "..a.."   "..a.."   "..a.."   "..a.."   "..a.."   "..a.."                                                                                                 "
+	local msg_5 = "          "..a.."                       "..a.."                                                                                                               "
+	local msg_6 = "          "..a.."                       "..a.."                                                                                                               "
+	local msg_7 = "          "..a.."                       "..a.."   "..a.."   "..a.."   "..a.."   "..a.."                                                                                            "
+
+
+	local args = { [1] = msg_1, [2] = "All",}
+	game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+
+	local args = { [1] = msg_2, [2] = "All",}
+	game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+
+	local args = { [1] = msg_3, [2] = "All",}
+	game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+
+	local args = { [1] = msg_4, [2] = "All",}
+	game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+
+	local args = { [1] = msg_5, [2] = "All",}
+	game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+
+	local args = { [1] = msg_6, [2] = "All",}
+	game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+
+	local args = { [1] = msg_7, [2] = "All",}
+	game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+
+end)
+
 addcmd('doinyourmom',{},function(args, speaker)
 	local Event = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest
 	Event:FireServer("Doin' your mom, doin' doin' your mom,", "All")
@@ -10789,7 +10829,7 @@ addcmd('unhatspin',{'unspinhats'},function(args, speaker)
 	end
 end)
 
-addcmd('hatcircle',{},function(args, speaker)
+addcmd('hatcircle',{'circlehat'},function(args, speaker)
 	_G.on = true
 	local parts = {}
 	local chr = game.Players.LocalPlayer.Character
@@ -10878,16 +10918,17 @@ addcmd('hataura',{},function(args, speaker)
 end)
 
 addcmd('ufo',{},function(args, speaker)
-	--execCmd('hatcircle')
 	local plr = game.Players.LocalPlayer
 	local plrChar = plr.Character
 	plrChar.Humanoid.WalkSpeed = 100
-	execCmd('flyjump')
 	local Spin = Instance.new("BodyAngularVelocity")
 	Spin.Name = "Spinning"
 	Spin.Parent = getRoot(speaker.Character)
 	Spin.MaxTorque = Vector3.new(0, math.huge, 0)
 	Spin.AngularVelocity = Vector3.new(0,100,0)
+	wait(1)
+	execCmd('hatcircle')
+	execCmd('flyjump')
 end)
 
 addcmd('clearhats',{'cleanhats'},function(args, speaker)
@@ -10971,7 +11012,7 @@ addcmd('clearcharappearance',{'clearchar','clrchar'},function(args, speaker)
 	speaker:ClearCharacterAppearance()
 end)
 
-addcmd('equiptools',{},function(args, speaker)
+addcmd('equiptools',{'equipalltools', 'equipallt'},function(args, speaker)
 	for i,v in pairs(speaker:FindFirstChildOfClass("Backpack"):GetChildren()) do
 		if v:IsA("Tool") or v:IsA("HopperBin") then
 			v.Parent = speaker.Character
