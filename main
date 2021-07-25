@@ -10339,6 +10339,7 @@ addcmd('dragchat',{'dragc'},function(args, speaker)
 end)
 
 addcmd('nodisplaynames',{'antidisplaynames'},function(args, speaker)
+	notify("Anti Display Names","Setting up, wait a second")
 	local j = require(game.Chat:WaitForChild("ClientChatModules").ChatSettings) -- this makes display names go away on chat
 	j.PlayerDisplayNamesEnabled = false
 
@@ -10359,7 +10360,7 @@ addcmd('nodisplaynames',{'antidisplaynames'},function(args, speaker)
 
 		end
 	end
-
+	notify("Anti Display Names", "Finished")
 	game:GetService("Players").PlayerAdded:Connect(function(player)
 		player.DisplayName = player.Name
 
